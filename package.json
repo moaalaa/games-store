@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "deploy": "ng deploy --base-href='https://moaalaa.github.io/games-store/'",
     "test": "ng test"
   },
   "private": true,
