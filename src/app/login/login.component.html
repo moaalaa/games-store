@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="col-12 mt-5">
+    <form [formGroup]="form" (ngSubmit)="login()">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input 
+                type="email"  
+                name="email" 
+                class="form-control" 
+                id="email"
+                formControlName="email"
+                required
+                autofocus
+                [class.is-invalid]="(email.dirty || email.touched) && email.invalid"
+                [class.is-valid]="(email.dirty || email.touched) && email.valid"
+            />
+
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback">
+                <span *ngIf="email.errors?.['required']">
+                    Email is Required
+                </span>
+                <span *ngIf="email.errors?.['email']">
+                    Please Enter a valid Email
+                </span>
+            </div>
+            
+            <div *ngIf="email.errors?.['wrongEmail']" class="invalid-feedback d-block">Invalid email</div>
+            
+            <div *ngIf="email.valid && (email.dirty || email.touched)" class="valid-feedback">
+                You Are Ok
+            </div>
+        </div>
+    
+        <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+            login
+            <i class="fas fa-plus"></i>
+        </button>
+    </form>
+</div>
