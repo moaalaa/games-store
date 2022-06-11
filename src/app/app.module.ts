@@ -16,6 +16,8 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { GamesComponent as AdminGamesComponent } from './admin/games/games.component';
 import { LoginComponent } from './login/login.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,12 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
